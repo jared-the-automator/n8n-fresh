@@ -1,4 +1,4 @@
-import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
 
 export class JobInfo implements INodeType {
     description: INodeTypeDescription = {
@@ -14,12 +14,12 @@ export class JobInfo implements INodeType {
             displayName: 'Input',
             maxConnections: 1,
             required: true,
-            type: 'main'
+            type: NodeConnectionType.Main
         }],
         outputs: [{
             displayName: 'Output',
             maxConnections: 1,
-            type: 'main'
+            type: NodeConnectionType.Main
         }],
         properties: [
             {
