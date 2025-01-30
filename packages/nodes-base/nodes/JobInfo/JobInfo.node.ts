@@ -29,7 +29,7 @@ export class JobInfo implements INodeType {
                 type: 'string',
                 default: '',
                 description: 'Title of the job position',
-                required: true,
+                required: false,
             },
             {
                 displayName: 'Industry',
@@ -37,7 +37,7 @@ export class JobInfo implements INodeType {
                 type: 'string',
                 default: '',
                 description: 'Industry sector of the job',
-                required: true,
+                required: false,
             },
             {
                 displayName: 'Company',
@@ -45,7 +45,7 @@ export class JobInfo implements INodeType {
                 type: 'string',
                 default: '',
                 description: 'Name of the company',
-                required: true,
+                required: false,
             },
             {
                 displayName: 'Location',
@@ -53,7 +53,7 @@ export class JobInfo implements INodeType {
                 type: 'string',
                 default: '',
                 description: 'Location of the job',
-                required: true,
+                required: false,
             }
         ],
     };
@@ -63,18 +63,23 @@ export class JobInfo implements INodeType {
         const returnData = [];
 
         for (let i = 0; i < items.length; i++) {
-            const jobTitle = this.getNodeParameter('jobTitle', i) as string;
-            const industry = this.getNodeParameter('industry', i) as string;
-            const company = this.getNodeParameter('company', i) as string;
-            const location = this.getNodeParameter('location', i) as string;
+            const jobInfo: Record<string, string> = {};
+            
+            // Only include parameters that have values
+            const jobTitle = this.getNodeParameter('jobTitle', i, '') as string;
+            if (jobTitle) jobInfo.jobTitle = jobTitle;
+            
+            const industry = this.getNodeParameter('industry', i, '') as string;
+            if (industry) jobInfo.industry = industry;
+            
+            const company = this.getNodeParameter('company', i, '') as string;
+            if (company) jobInfo.company = company;
+            
+            const location = this.getNodeParameter('location', i, '') as string;
+            if (location) jobInfo.location = location;
 
             returnData.push({
-                json: {
-                    jobTitle,
-                    industry,
-                    company,
-                    location,
-                }
+                json: jobInfo
             });
         }
 
