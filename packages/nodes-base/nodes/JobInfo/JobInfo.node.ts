@@ -10,8 +10,8 @@ export class JobInfo implements INodeType {
         defaults: {
             name: 'Job Info',
         },
-        inputs: [{ type: 'main' }],
-        outputs: [{ type: 'main' }],
+        inputs: [{ type: 'main' }],  // Changed from 'main'
+        outputs: [{ type: 'main' }], // Changed from 'main'
         properties: [
             {
                 displayName: 'Operation',
