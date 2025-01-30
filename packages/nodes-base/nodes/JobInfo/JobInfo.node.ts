@@ -7,7 +7,7 @@ export class JobInfo implements INodeType {
         icon: 'fa:briefcase',
         group: ['transform'],
         version: 1,
-        description: 'Get information about a job',
+        description: 'Create and manage job information',
         defaults: {
             name: 'Job Info',
         },
@@ -24,21 +24,60 @@ export class JobInfo implements INodeType {
         }],
         properties: [
             {
-                displayName: 'Operation',
-                name: 'operation',
+                displayName: 'Job Title',
+                name: 'jobTitle',
                 type: 'string',
-                default: 'Get Job Info',
-                description: 'The operation to perform',
+                default: '',
+                description: 'Title of the job position',
+                required: true,
             },
+            {
+                displayName: 'Industry',
+                name: 'industry',
+                type: 'string',
+                default: '',
+                description: 'Industry sector of the job',
+                required: true,
+            },
+            {
+                displayName: 'Company',
+                name: 'company',
+                type: 'string',
+                default: '',
+                description: 'Name of the company',
+                required: true,
+            },
+            {
+                displayName: 'Location',
+                name: 'location',
+                type: 'string',
+                default: '',
+                description: 'Location of the job',
+                required: true,
+            }
         ],
     };
 
     async execute(this: IExecuteFunctions) {
-        return [this.helpers.returnJsonArray([{
-            jobTitle: 'Software Developer',
-            company: 'Example Corp',
-            location: 'Remote',
-            salary: '$100,000',
-        }])];
+        const items = this.getInputData();
+        const returnData = [];
+
+        for (let i = 0; i < items.length; i++) {
+            const jobTitle = this.getNodeParameter('jobTitle', i) as string;
+            const industry = this.getNodeParameter('industry', i) as string;
+            const company = this.getNodeParameter('company', i) as string;
+            const location = this.getNodeParameter('location', i) as string;
+
+            returnData.push({
+                json: {
+                    jobTitle,
+                    industry,
+                    company,
+                    location,
+                }
+            });
+        }
+
+        return [returnData];
     }
 }
