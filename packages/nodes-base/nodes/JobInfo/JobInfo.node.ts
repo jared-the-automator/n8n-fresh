@@ -4,6 +4,7 @@ export class JobInfo implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Job Info',
         name: 'jobInfo',
+        icon: 'fa:briefcase',
         group: ['transform'],
         version: 1,
         description: 'Get information about a job',
@@ -33,7 +34,6 @@ export class JobInfo implements INodeType {
     };
 
     async execute() {
-        // Return the job info
         return [
             [
                 {
