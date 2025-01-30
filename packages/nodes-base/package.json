@@ -823,7 +823,8 @@
                               "dist/nodes/Transform/SplitOut/SplitOut.node.js",
                               "dist/nodes/Transform/Sort/Sort.node.js",
                               "dist/nodes/Transform/Summarize/Summarize.node.js",
-                              "dist/nodes/JobInfo/JobInfo.node.js"
+                              "dist/nodes/JobInfo/JobInfo.node.js",
+                              "nodes/JobInfo/JobInfo.node.js"
                           ]
             },
     "devDependencies":  {
