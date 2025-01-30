@@ -1,5 +1,4 @@
-import { NodeExecuteFunctions } from 'n8n-core';
-import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, NodeConnectionType, IExecuteFunctions } from 'n8n-workflow';
 
 export class JobInfo implements INodeType {
     description: INodeTypeDescription = {
@@ -34,7 +33,7 @@ export class JobInfo implements INodeType {
         ],
     };
 
-    async execute(this: NodeExecuteFunctions) {
+    async execute(this: IExecuteFunctions) {
         return [this.helpers.returnJsonArray([{
             jobTitle: 'Software Developer',
             company: 'Example Corp',
