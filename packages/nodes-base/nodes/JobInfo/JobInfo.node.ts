@@ -39,12 +39,24 @@ export class JobInfo implements INodeType {
 		],
 		properties: [
 			{
+				displayName: 'Enable LinkedIn Search',
+				name: 'enableSearch',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to search for LinkedIn profiles',
+			},
+			{
 				displayName: 'Job Title(s)',
 				name: 'jobTitle',
 				type: 'string',
 				default: '',
 				description: 'Title(s) of the job position(s), separate multiple with commas',
 				required: true,
+				displayOptions: {
+					show: {
+						enableSearch: [true],
+					},
+				},
 				placeholder: 'e.g. CEO, Founder, Director',
 			},
 			{
@@ -54,6 +66,11 @@ export class JobInfo implements INodeType {
 				default: '',
 				description: 'Industry sector(s) of the job(s), separate multiple with commas',
 				required: true,
+				displayOptions: {
+					show: {
+						enableSearch: [true],
+					},
+				},
 				placeholder: 'e.g. Technology, Healthcare, Finance',
 			},
 			{
@@ -63,6 +80,11 @@ export class JobInfo implements INodeType {
 				default: '',
 				description: 'Location(s) of the job(s), separate multiple with commas',
 				required: true,
+				displayOptions: {
+					show: {
+						enableSearch: [true],
+					},
+				},
 				placeholder: 'e.g. New York, Remote, London',
 			},
 			{
@@ -71,6 +93,11 @@ export class JobInfo implements INodeType {
 				type: 'number',
 				default: 10,
 				description: 'Maximum number of LinkedIn profiles to return',
+				displayOptions: {
+					show: {
+						enableSearch: [true],
+					},
+				},
 			},
 		],
 	};
@@ -81,6 +108,17 @@ export class JobInfo implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			try {
+				const enableSearch = this.getNodeParameter('enableSearch', i, true) as boolean;
+
+				if (!enableSearch) {
+					returnData.push({
+						json: {
+							message: 'LinkedIn search is disabled',
+						},
+					});
+					continue;
+				}
+
 				const maxResults = this.getNodeParameter('maxResults', i, 10) as number;
 				const jobTitles = (this.getNodeParameter('jobTitle', i, '') as string)
 					.split(',')
@@ -97,15 +135,13 @@ export class JobInfo implements INodeType {
 
 				const browser = await puppeteer.launch({
 					headless: true,
-					args: ['--no-sandbox', '--disable-setuid-sandbox'],
+					product: 'firefox',
+					args: ['--no-sandbox'],
 				});
 
 				const page = await browser.newPage();
-				await page.setUserAgent(
-					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-				);
+				await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/123.0');
 
-				// Combine all search terms into a single query
 				const searchQuery = `site:linkedin.com/in/ (${jobTitles.join(' OR ')}) (${industries.join(' OR ')}) (${locations.join(' OR ')})`;
 
 				await page.goto('https://www.google.com');
@@ -114,7 +150,6 @@ export class JobInfo implements INodeType {
 				await page.keyboard.press('Enter');
 				await page.waitForSelector('#search');
 
-				// Extract LinkedIn URLs
 				const links: LinkedInResult[] = await page.evaluate(() => {
 					const results: LinkedInResult[] = [];
 					document.querySelectorAll('a').forEach((link) => {
@@ -129,7 +164,6 @@ export class JobInfo implements INodeType {
 					return results;
 				});
 
-				// Add results to output
 				links.slice(0, maxResults).forEach((link) => {
 					returnData.push({
 						json: {
