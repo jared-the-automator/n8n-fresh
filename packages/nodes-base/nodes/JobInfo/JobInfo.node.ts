@@ -6,6 +6,11 @@ import {
 } from 'n8n-workflow';
 import puppeteer from 'puppeteer';
 
+interface LinkedInResult {
+	url: string;
+	title: string;
+}
+
 export class JobInfo implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Job Info',
@@ -39,7 +44,7 @@ export class JobInfo implements INodeType {
 				type: 'string',
 				default: '',
 				description: 'Title(s) of the job position(s), separate multiple with commas',
-				required: false,
+				required: true,
 				placeholder: 'e.g. CEO, Founder, Director',
 			},
 			{
@@ -48,17 +53,8 @@ export class JobInfo implements INodeType {
 				type: 'string',
 				default: '',
 				description: 'Industry sector(s) of the job(s), separate multiple with commas',
-				required: false,
+				required: true,
 				placeholder: 'e.g. Technology, Healthcare, Finance',
-			},
-			{
-				displayName: 'Company(s)',
-				name: 'company',
-				type: 'string',
-				default: '',
-				description: 'Name(s) of the company(s), separate multiple with commas',
-				required: false,
-				placeholder: 'e.g. Apple, Google, Microsoft',
 			},
 			{
 				displayName: 'Location(s)',
@@ -66,15 +62,15 @@ export class JobInfo implements INodeType {
 				type: 'string',
 				default: '',
 				description: 'Location(s) of the job(s), separate multiple with commas',
-				required: false,
+				required: true,
 				placeholder: 'e.g. New York, Remote, London',
 			},
 			{
-				displayName: 'Search LinkedIn Profiles',
-				name: 'searchLinkedIn',
-				type: 'boolean',
-				default: true,
-				description: 'Whether to search for LinkedIn profiles matching these criteria',
+				displayName: 'Maximum Results',
+				name: 'maxResults',
+				type: 'number',
+				default: 10,
+				description: 'Maximum number of LinkedIn profiles to return',
 			},
 		],
 	};
@@ -84,94 +80,78 @@ export class JobInfo implements INodeType {
 		const returnData = [];
 
 		for (let i = 0; i < items.length; i++) {
-			const searchLinkedIn = this.getNodeParameter('searchLinkedIn', i, true) as boolean;
+			try {
+				const maxResults = this.getNodeParameter('maxResults', i, 10) as number;
+				const jobTitles = (this.getNodeParameter('jobTitle', i, '') as string)
+					.split(',')
+					.map((t) => t.trim())
+					.filter(Boolean);
+				const industries = (this.getNodeParameter('industry', i, '') as string)
+					.split(',')
+					.map((t) => t.trim())
+					.filter(Boolean);
+				const locations = (this.getNodeParameter('location', i, '') as string)
+					.split(',')
+					.map((t) => t.trim())
+					.filter(Boolean);
 
-			if (searchLinkedIn) {
-				try {
-					const jobTitles = (this.getNodeParameter('jobTitle', i, '') as string)
-						.split(',')
-						.map((t) => t.trim())
-						.filter(Boolean);
-					const industries = (this.getNodeParameter('industry', i, '') as string)
-						.split(',')
-						.map((t) => t.trim())
-						.filter(Boolean);
-					const companies = (this.getNodeParameter('company', i, '') as string)
-						.split(',')
-						.map((t) => t.trim())
-						.filter(Boolean);
-					const locations = (this.getNodeParameter('location', i, '') as string)
-						.split(',')
-						.map((t) => t.trim())
-						.filter(Boolean);
+				const browser = await puppeteer.launch({
+					headless: true,
+					args: ['--no-sandbox', '--disable-setuid-sandbox'],
+				});
 
-					// Launch browser
-					const browser = await puppeteer.launch({
-						headless: false, // Set to true in production
-						args: ['--no-sandbox', '--disable-setuid-sandbox'],
-					});
+				const page = await browser.newPage();
+				await page.setUserAgent(
+					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+				);
 
-					const page = await browser.newPage();
-					await page.setUserAgent(
-						'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-					);
+				// Combine all search terms into a single query
+				const searchQuery = `site:linkedin.com/in/ (${jobTitles.join(' OR ')}) (${industries.join(' OR ')}) (${locations.join(' OR ')})`;
 
-					// For each combination of criteria, perform a search
-					for (const title of jobTitles) {
-						for (const industry of industries) {
-							for (const location of locations) {
-								const searchQuery = `site:linkedin.com/in/ ${title} ${industry} ${location}`;
+				await page.goto('https://www.google.com');
+				await page.waitForSelector('input[name="q"]');
+				await page.type('input[name="q"]', searchQuery);
+				await page.keyboard.press('Enter');
+				await page.waitForSelector('#search');
 
-								await page.goto('https://www.google.com');
-								await page.waitForSelector('input[name="q"]');
-								await page.type('input[name="q"]', searchQuery);
-								await page.keyboard.press('Enter');
-								await page.waitForSelector('#search');
-
-								// Extract LinkedIn URLs
-								const links = await page.evaluate(() => {
-									const results = [];
-									document.querySelectorAll('a').forEach((link) => {
-										const href = link.getAttribute('href');
-										if (href && href.includes('linkedin.com/in/')) {
-											results.push({
-												url: href,
-												title: link.textContent || '',
-											});
-										}
-									});
-									return results;
-								});
-
-								// Add each result as a separate item
-								for (const link of links) {
-									returnData.push({
-										json: {
-											profileUrl: link.url,
-											searchCriteria: {
-												jobTitle: title,
-												industry: industry,
-												location: location,
-											},
-										},
-									});
-								}
-
-								// Wait briefly between searches
-								await new Promise((r) => setTimeout(r, 2000));
-							}
+				// Extract LinkedIn URLs
+				const links: LinkedInResult[] = await page.evaluate(() => {
+					const results: LinkedInResult[] = [];
+					document.querySelectorAll('a').forEach((link) => {
+						const href = link.getAttribute('href');
+						if (href && href.includes('linkedin.com/in/')) {
+							results.push({
+								url: href,
+								title: link.textContent || '',
+							});
 						}
-					}
+					});
+					return results;
+				});
 
-					await browser.close();
-				} catch (error) {
-					console.error('Search error:', error);
+				// Add results to output
+				links.slice(0, maxResults).forEach((link) => {
 					returnData.push({
 						json: {
-							error: error.message,
+							profileUrl: link.url,
+							profileTitle: link.title,
+							searchCriteria: {
+								jobTitle: jobTitles.join(', '),
+								industry: industries.join(', '),
+								location: locations.join(', '),
+							},
 						},
 					});
-				}
+				});
+
+				await browser.close();
+			} catch (error) {
+				const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+				returnData.push({
+					json: {
+						error: errorMessage,
+					},
+				});
 			}
 		}
 
