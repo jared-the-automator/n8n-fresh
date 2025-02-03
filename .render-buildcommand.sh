@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Install Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# Install Chrome dependencies and Chrome itself
 apt-get update
-apt-get install -y ./google-chrome-stable_current_amd64.deb
+apt-get install -y wget gnupg
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/sources.list.d/google.list
+apt-get update
+apt-get install -y google-chrome-stable
 
-# Install dependencies and build
-pnpm install --no-frozen-lockfile
+# Original build commands
+pnpm install
 pnpm build
