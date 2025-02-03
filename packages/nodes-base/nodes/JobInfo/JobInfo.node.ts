@@ -12,95 +12,7 @@ interface LinkedInResult {
 }
 
 export class JobInfo implements INodeType {
-	description: INodeTypeDescription = {
-		displayName: 'Job Info',
-		name: 'jobInfo',
-		icon: 'fa:briefcase',
-		group: ['transform'],
-		version: 1,
-		description: 'Search for LinkedIn profiles based on job criteria',
-		defaults: {
-			name: 'Job Info',
-		},
-		inputs: [
-			{
-				displayName: 'Input',
-				maxConnections: 1,
-				required: true,
-				type: NodeConnectionType.Main,
-			},
-		],
-		outputs: [
-			{
-				displayName: 'Output',
-				maxConnections: 1,
-				type: NodeConnectionType.Main,
-			},
-		],
-		properties: [
-			{
-				displayName: 'Enable LinkedIn Search',
-				name: 'enableSearch',
-				type: 'boolean',
-				default: true,
-				description: 'Whether to search for LinkedIn profiles',
-			},
-			{
-				displayName: 'Job Title(s)',
-				name: 'jobTitle',
-				type: 'string',
-				default: '',
-				description: 'Title(s) of the job position(s), separate multiple with commas',
-				required: true,
-				displayOptions: {
-					show: {
-						enableSearch: [true],
-					},
-				},
-				placeholder: 'e.g. CEO, Founder, Director',
-			},
-			{
-				displayName: 'Industry(s)',
-				name: 'industry',
-				type: 'string',
-				default: '',
-				description: 'Industry sector(s) of the job(s), separate multiple with commas',
-				required: true,
-				displayOptions: {
-					show: {
-						enableSearch: [true],
-					},
-				},
-				placeholder: 'e.g. Technology, Healthcare, Finance',
-			},
-			{
-				displayName: 'Location(s)',
-				name: 'location',
-				type: 'string',
-				default: '',
-				description: 'Location(s) of the job(s), separate multiple with commas',
-				required: true,
-				displayOptions: {
-					show: {
-						enableSearch: [true],
-					},
-				},
-				placeholder: 'e.g. New York, Remote, London',
-			},
-			{
-				displayName: 'Maximum Results',
-				name: 'maxResults',
-				type: 'number',
-				default: 10,
-				description: 'Maximum number of LinkedIn profiles to return',
-				displayOptions: {
-					show: {
-						enableSearch: [true],
-					},
-				},
-			},
-		],
-	};
+	// ... [previous code until execute function] ...
 
 	async execute(this: IExecuteFunctions) {
 		const items = this.getInputData();
@@ -133,20 +45,22 @@ export class JobInfo implements INodeType {
 					.map((t) => t.trim())
 					.filter(Boolean);
 
+				// Use Puppeteer's Chrome
+				const browserFetcher = puppeteer.createBrowserFetcher();
+				const revisionInfo = await browserFetcher.download('1108766');
+
 				const browser = await puppeteer.launch({
 					headless: true,
+					executablePath: revisionInfo.executablePath,
 					args: [
 						'--no-sandbox',
 						'--disable-setuid-sandbox',
 						'--disable-dev-shm-usage',
-						'--disable-accelerated-2d-canvas',
 						'--disable-gpu',
-						'--window-size=1920,1080',
 					],
 				});
 
 				const page = await browser.newPage();
-				await page.setViewport({ width: 1920, height: 1080 });
 				await page.setUserAgent(
 					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
 				);
