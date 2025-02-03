@@ -134,24 +134,26 @@ export class JobInfo implements INodeType {
 					.filter(Boolean);
 
 				const browser = await puppeteer.launch({
-					headless: 'new',
+					headless: true,
 					args: [
 						'--no-sandbox',
 						'--disable-setuid-sandbox',
 						'--disable-dev-shm-usage',
 						'--disable-accelerated-2d-canvas',
 						'--disable-gpu',
+						'--window-size=1920,1080',
 					],
 				});
 
 				const page = await browser.newPage();
+				await page.setViewport({ width: 1920, height: 1080 });
 				await page.setUserAgent(
 					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
 				);
 
 				const searchQuery = `site:linkedin.com/in/ (${jobTitles.join(' OR ')}) (${industries.join(' OR ')}) (${locations.join(' OR ')})`;
 
-				await page.goto('https://www.google.com');
+				await page.goto('https://www.google.com', { waitUntil: 'networkidle0' });
 				await page.waitForSelector('input[name="q"]');
 				await page.type('input[name="q"]', searchQuery);
 				await page.keyboard.press('Enter');
@@ -171,11 +173,10 @@ export class JobInfo implements INodeType {
 					return results;
 				});
 
-				links.slice(0, maxResults).forEach((link) => {
+				if (links.length === 0) {
 					returnData.push({
 						json: {
-							profileUrl: link.url,
-							profileTitle: link.title,
+							message: 'No LinkedIn profiles found matching the criteria',
 							searchCriteria: {
 								jobTitle: jobTitles.join(', '),
 								industry: industries.join(', '),
@@ -183,7 +184,21 @@ export class JobInfo implements INodeType {
 							},
 						},
 					});
-				});
+				} else {
+					links.slice(0, maxResults).forEach((link) => {
+						returnData.push({
+							json: {
+								profileUrl: link.url,
+								profileTitle: link.title,
+								searchCriteria: {
+									jobTitle: jobTitles.join(', '),
+									industry: industries.join(', '),
+									location: locations.join(', '),
+								},
+							},
+						});
+					});
+				}
 
 				await browser.close();
 			} catch (error) {
