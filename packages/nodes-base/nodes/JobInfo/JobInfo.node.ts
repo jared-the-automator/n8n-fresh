@@ -134,13 +134,20 @@ export class JobInfo implements INodeType {
 					.filter(Boolean);
 
 				const browser = await puppeteer.launch({
-					headless: true,
-					product: 'firefox',
-					args: ['--no-sandbox'],
+					headless: 'new',
+					args: [
+						'--no-sandbox',
+						'--disable-setuid-sandbox',
+						'--disable-dev-shm-usage',
+						'--disable-accelerated-2d-canvas',
+						'--disable-gpu',
+					],
 				});
 
 				const page = await browser.newPage();
-				await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/123.0');
+				await page.setUserAgent(
+					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+				);
 
 				const searchQuery = `site:linkedin.com/in/ (${jobTitles.join(' OR ')}) (${industries.join(' OR ')}) (${locations.join(' OR ')})`;
 
