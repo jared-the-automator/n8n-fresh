@@ -8,6 +8,8 @@ interface LinkedInResult {
 }
 
 export class JobInfo implements INodeType {
+  private puppeteer = require("puppeteer-core");
+
   description: INodeTypeDescription = {
     displayName: "Job Info",
     name: "jobInfo",
@@ -99,9 +101,6 @@ export class JobInfo implements INodeType {
     const items = this.getInputData();
     const returnData = [];
 
-    // Dynamic import of puppeteer
-    const puppeteer = await import('puppeteer-core').then(module => module.default);
-
     for (let i = 0; i < items.length; i++) {
       try {
         const enableSearch = this.getNodeParameter("enableSearch", i, true) as boolean;
@@ -129,7 +128,7 @@ export class JobInfo implements INodeType {
           .map((t) => t.trim())
           .filter(Boolean);
 
-        const browser = await puppeteer.launch({
+        const browser = await this.puppeteer.launch({
           headless: true,
           executablePath: "/tmp/chrome/chrome/opt/google/chrome/chrome",
           args: [
