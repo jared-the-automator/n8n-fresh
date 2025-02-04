@@ -7,14 +7,11 @@ interface LinkedInResult {
   title: string;
 }
 
+function loadPuppeteer() {
+  return require("puppeteer-core");
+}
+
 export class JobInfo implements INodeType {
-  private puppeteer: any;
-
-  constructor() {
-    // Initialize puppeteer in constructor
-    this.puppeteer = require("puppeteer-core");
-  }
-
   description: INodeTypeDescription = {
     displayName: "Job Info",
     name: "jobInfo",
@@ -105,6 +102,7 @@ export class JobInfo implements INodeType {
   async execute(this: IExecuteFunctions) {
     const items = this.getInputData();
     const returnData = [];
+    const puppeteer = loadPuppeteer();
 
     for (let i = 0; i < items.length; i++) {
       try {
@@ -133,7 +131,7 @@ export class JobInfo implements INodeType {
           .map((t) => t.trim())
           .filter(Boolean);
 
-        const browser = await this.puppeteer.launch({
+        const browser = await puppeteer.launch({
           headless: true,
           executablePath: "/tmp/chrome/chrome/opt/google/chrome/chrome",
           args: [
