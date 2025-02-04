@@ -7,14 +7,29 @@ interface LinkedInResult {
   title: string;
 }
 
-// Global variable to store puppeteer instance
-let puppeteerInstance: any = null;
+class PuppeteerManager {
+  private static instance: PuppeteerManager;
+  private puppeteer: any;
 
-// Initialize puppeteer synchronously
-try {
-  puppeteerInstance = require("puppeteer-core");
-} catch (error) {
-  console.error("Failed to load puppeteer:", error);
+  private constructor() {
+    try {
+      this.puppeteer = require("puppeteer-core");
+    } catch (error) {
+      console.error("Failed to load puppeteer:", error);
+      this.puppeteer = null;
+    }
+  }
+
+  public static getInstance(): PuppeteerManager {
+    if (!PuppeteerManager.instance) {
+      PuppeteerManager.instance = new PuppeteerManager();
+    }
+    return PuppeteerManager.instance;
+  }
+
+  public getPuppeteer(): any {
+    return this.puppeteer;
+  }
 }
 
 export class JobInfo implements INodeType {
@@ -72,7 +87,8 @@ export class JobInfo implements INodeType {
     const items = this.getInputData();
     const returnData = [];
 
-    if (!puppeteerInstance) {
+    const puppeteer = PuppeteerManager.getInstance().getPuppeteer();
+    if (!puppeteer) {
       throw new Error("Puppeteer is not initialized");
     }
 
@@ -103,7 +119,7 @@ export class JobInfo implements INodeType {
           .map((t) => t.trim())
           .filter(Boolean);
 
-        const browser = await puppeteerInstance.launch({
+        const browser = await puppeteer.launch({
           headless: true,
           executablePath: "/tmp/chrome/chrome/opt/google/chrome/chrome",
           args: [
