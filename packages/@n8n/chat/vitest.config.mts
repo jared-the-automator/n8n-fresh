@@ -19,12 +19,9 @@ const vitestConfig = defineConfig({
 						reporter: process.env.CI === 'true' ? 'cobertura' : 'text-summary',
 						all: true,
 					},
-			  }
+				}
 			: {}),
 	},
 }) as UserConfig;
 
-export default mergeConfig(
-	viteConfig,
-	vitestConfig,
-);
+export default mergeConfig(viteConfig, vitestConfig);

@@ -1079,7 +1079,8 @@ function openContextMenu(event: MouseEvent, source: 'node-button' | 'node-right-
 			max-width: calc(
 				var(--node-width) - var(--configurable-node-icon-offset) - var(
 						--configurable-node-icon-size
-					) - 2 * var(--spacing-s)
+					) -
+					2 * var(--spacing-s)
 			);
 			.node-name > p {
 				color: var(--color-configurable-node-name);

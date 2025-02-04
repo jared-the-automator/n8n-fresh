@@ -217,7 +217,8 @@ function openContextMenu(event: MouseEvent) {
 			max-width: calc(
 				var(--canvas-node--width) - var(--configurable-node--icon-offset) - var(
 						--configurable-node--icon-size
-					) - 2 * var(--spacing-s)
+					) -
+					2 * var(--spacing-s)
 			);
 		}
 
