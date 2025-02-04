@@ -7,6 +7,17 @@ interface LinkedInResult {
   title: string;
 }
 
+function loadPuppeteer() {
+  return new Promise((resolve, reject) => {
+    try {
+      const puppeteer = require("puppeteer-core");
+      resolve(puppeteer);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 export class JobInfo implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Job Info",
@@ -58,10 +69,6 @@ export class JobInfo implements INodeType {
     ],
   };
 
-  private async loadPuppeteer() {
-    return import('puppeteer-core').then(module => module.default);
-  }
-
   async execute(this: IExecuteFunctions): Promise<[{ json: any }[]]> {
     const items = this.getInputData();
     const returnData = [];
@@ -93,7 +100,7 @@ export class JobInfo implements INodeType {
           .map((t) => t.trim())
           .filter(Boolean);
 
-        const puppeteer = await this.loadPuppeteer();
+        const puppeteer = await loadPuppeteer();
         const browser = await puppeteer.launch({
           headless: true,
           executablePath: "/tmp/chrome/chrome/opt/google/chrome/chrome",
