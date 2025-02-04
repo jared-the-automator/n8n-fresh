@@ -1,7 +1,9 @@
 import type { IExecuteFunctions } from "n8n-core";
 import type { INodeExecutionData, INodeType, INodeTypeDescription } from "n8n-workflow";
 import { NodeConnectionType } from "n8n-workflow";
-import puppeteer from "puppeteer";
+
+// Use require instead of import
+const puppeteer = require("puppeteer");
 
 interface LinkedInResult {
   url: string;
