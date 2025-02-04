@@ -1,4 +1,3 @@
-const puppeteer = require("puppeteer-core");
 import type { INodeType, INodeTypeDescription } from "n8n-workflow";
 import { NodeConnectionType } from "n8n-workflow";
 import type { IExecuteFunctions } from "n8n-workflow";
@@ -99,6 +98,9 @@ export class JobInfo implements INodeType {
   async execute(this: IExecuteFunctions) {
     const items = this.getInputData();
     const returnData = [];
+
+    // Dynamic import of puppeteer
+    const puppeteer = await import('puppeteer-core').then(module => module.default);
 
     for (let i = 0; i < items.length; i++) {
       try {
