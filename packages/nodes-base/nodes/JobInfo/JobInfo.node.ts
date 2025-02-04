@@ -8,7 +8,12 @@ interface LinkedInResult {
 }
 
 export class JobInfo implements INodeType {
-  private puppeteer = require("puppeteer-core");
+  private puppeteer: any;
+
+  constructor() {
+    // Initialize puppeteer in constructor
+    this.puppeteer = require("puppeteer-core");
+  }
 
   description: INodeTypeDescription = {
     displayName: "Job Info",
