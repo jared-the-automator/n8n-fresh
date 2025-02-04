@@ -23,13 +23,8 @@
     "watch": "tsc -p tsconfig.build.json --watch",
     "lint": "eslint --quiet src"
   },
-  "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts",
-    "dist/**/*.json"
-  ],
   "dependencies": {
-    "puppeteer-core": "^19.11.1"
+    "puppeteer": "^19.11.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",

@@ -1,35 +1,11 @@
-import type { INodeType, INodeTypeDescription } from "n8n-workflow";
+import type { IExecuteFunctions } from "n8n-core";
+import type { INodeExecutionData, INodeType, INodeTypeDescription } from "n8n-workflow";
 import { NodeConnectionType } from "n8n-workflow";
-import type { IExecuteFunctions } from "n8n-workflow";
+import puppeteer from "puppeteer";
 
 interface LinkedInResult {
   url: string;
   title: string;
-}
-
-class PuppeteerManager {
-  private static instance: PuppeteerManager;
-  private puppeteer: any;
-
-  private constructor() {
-    try {
-      this.puppeteer = require("puppeteer-core");
-    } catch (error) {
-      console.error("Failed to load puppeteer:", error);
-      this.puppeteer = null;
-    }
-  }
-
-  public static getInstance(): PuppeteerManager {
-    if (!PuppeteerManager.instance) {
-      PuppeteerManager.instance = new PuppeteerManager();
-    }
-    return PuppeteerManager.instance;
-  }
-
-  public getPuppeteer(): any {
-    return this.puppeteer;
-  }
 }
 
 export class JobInfo implements INodeType {
@@ -83,14 +59,9 @@ export class JobInfo implements INodeType {
     ],
   };
 
-  async execute(this: IExecuteFunctions): Promise<[{ json: any }[]]> {
+  async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
     const items = this.getInputData();
-    const returnData = [];
-
-    const puppeteer = PuppeteerManager.getInstance().getPuppeteer();
-    if (!puppeteer) {
-      throw new Error("Puppeteer is not initialized");
-    }
+    const returnData: INodeExecutionData[] = [];
 
     for (let i = 0; i < items.length; i++) {
       try {
@@ -121,7 +92,6 @@ export class JobInfo implements INodeType {
 
         const browser = await puppeteer.launch({
           headless: true,
-          executablePath: "/tmp/chrome/chrome/opt/google/chrome/chrome",
           args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
@@ -130,9 +100,6 @@ export class JobInfo implements INodeType {
             "--no-first-run",
             "--single-process",
             "--disable-extensions",
-            "--disable-software-rasterizer",
-            "--disk-cache-dir=/tmp/chrome-cache",
-            "--user-data-dir=/tmp/chrome-user-data"
           ],
         });
 
@@ -183,7 +150,7 @@ export class JobInfo implements INodeType {
           }
 
           const links = await page.evaluate(() => {
-            const results = [];
+            const results: LinkedInResult[] = [];
             document.querySelectorAll("a").forEach((link) => {
               const href = link.getAttribute("href");
               if (href && href.includes("linkedin.com/in/")) {
