@@ -3,11 +3,6 @@ import { NodeConnectionType } from "n8n-workflow";
 import type { IExecuteFunctions } from "n8n-workflow";
 import puppeteer from "puppeteer";
 
-interface LinkedInResult {
-  url: string;
-  title: string;
-}
-
 export class JobInfo implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Job Info",
@@ -54,7 +49,6 @@ export class JobInfo implements INodeType {
             enableSearch: [true],
           },
         },
-        placeholder: "e.g. CEO, Founder, Director",
       },
       {
         displayName: "Industry(s)",
@@ -68,7 +62,6 @@ export class JobInfo implements INodeType {
             enableSearch: [true],
           },
         },
-        placeholder: "e.g. Technology, Healthcare, Finance",
       },
       {
         displayName: "Location(s)",
@@ -82,7 +75,6 @@ export class JobInfo implements INodeType {
             enableSearch: [true],
           },
         },
-        placeholder: "e.g. New York, Remote, London",
       },
       {
         displayName: "Maximum Results",
@@ -132,20 +124,17 @@ export class JobInfo implements INodeType {
 
         const browser = await puppeteer.launch({
           headless: true,
-          executablePath: "/usr/bin/chromium-browser",
           args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
             "--disable-dev-shm-usage",
             "--disable-gpu",
             "--no-first-run",
-            "--no-zygote",
             "--single-process",
-            "--disable-extensions"
+            "--disable-extensions",
+            "--disk-cache-dir=/tmp/chrome-cache",
+            "--user-data-dir=/tmp/chrome-user-data"
           ],
-          env: {
-            CHROMIUM_PATH: "/usr/bin/chromium-browser"
-          }
         });
 
         const page = await browser.newPage();
@@ -163,8 +152,8 @@ export class JobInfo implements INodeType {
         await page.keyboard.press("Enter");
         await page.waitForSelector("#search");
 
-        const links: LinkedInResult[] = await page.evaluate(() => {
-          const results: LinkedInResult[] = [];
+        const links = await page.evaluate(() => {
+          const results = [];
           document.querySelectorAll("a").forEach((link) => {
             const href = link.getAttribute("href");
             if (href && href.includes("linkedin.com/in/")) {
@@ -210,8 +199,7 @@ export class JobInfo implements INodeType {
         returnData.push({
           json: {
             error: errorMessage,
-            details: "Error launching browser. Check Chrome installation.",
-            platform: process.platform,
+            details: "Error launching browser using bundled Chrome.",
           },
         });
       }
