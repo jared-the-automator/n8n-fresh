@@ -2,8 +2,13 @@ import type { IExecuteFunctions } from "n8n-core";
 import type { INodeExecutionData, INodeType, INodeTypeDescription } from "n8n-workflow";
 import { NodeConnectionType } from "n8n-workflow";
 
-// Use require instead of import
-const puppeteer = require("puppeteer");
+// Initialize puppeteer without await
+let puppeteer;
+try {
+  puppeteer = require("puppeteer");
+} catch (error) {
+  console.error("Failed to load puppeteer:", error);
+}
 
 interface LinkedInResult {
   url: string;
@@ -57,11 +62,31 @@ export class JobInfo implements INodeType {
           },
         },
       },
-      // ... other properties remain the same
+      // ... rest of the properties remain the same
     ],
   };
 
+  // Move browser launch configuration to a separate method
+  private getBrowserLaunchOptions() {
+    return {
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--no-first-run",
+        "--single-process",
+        "--disable-extensions",
+      ],
+    };
+  }
+
   async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+    if (!puppeteer) {
+      throw new Error("Puppeteer is not initialized");
+    }
+
     const items = this.getInputData();
     const returnData: INodeExecutionData[] = [];
 
@@ -92,18 +117,7 @@ export class JobInfo implements INodeType {
           .map((t) => t.trim())
           .filter(Boolean);
 
-        const browser = await puppeteer.launch({
-          headless: true,
-          args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--no-first-run",
-            "--single-process",
-            "--disable-extensions",
-          ],
-        });
+        const browser = await puppeteer.launch(this.getBrowserLaunchOptions());
 
         try {
           const page = await browser.newPage();
