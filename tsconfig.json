@@ -1,24 +1,15 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
     "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "node",
     "lib": ["es2022", "dom"],
-    "removeComments": true,
-    "useUnknownInCatchVariables": false,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "strict": true,
-    "preserveConstEnums": true,
-    "declaration": true,
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "allowJs": true
-  },
-  "include": ["packages/**/*"],
-  "exclude": ["node_modules/**/*", "**/*.spec.ts"]
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": false,
+    "strict": true
+  }
 }
