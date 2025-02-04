@@ -1,11 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "dist",
     "target": "es2022",
     "module": "esnext",
     "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": ".",
     "lib": ["es2022", "dom"],
     "types": ["node"],
     "esModuleInterop": true,

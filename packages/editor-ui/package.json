@@ -1,11 +1,7 @@
 {
   "name": "n8n-editor-ui",
   "version": "1.0.0",
-  "dependencies": {
-    // ... existing dependencies
-  },
   "devDependencies": {
-    "vite-plugin-node-polyfills": "^0.21.0",
-    // ... existing devDependencies
+    "vite-plugin-node-polyfills": "^0.21.0"
   }
 }

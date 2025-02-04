@@ -6,8 +6,7 @@ export default defineConfig({
   plugins: [
     vue(),
     nodePolyfills({
-      include: ["os", "path", "util"]
+      include: ["os"]  // Specifically include only the 'os' module
     })
-  ],
-  // ... rest of your existing config
+  ]
 });
