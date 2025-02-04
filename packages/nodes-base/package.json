@@ -1,16 +1,34 @@
 {
-  "name": "n8n-nodes-base",
+  "name": "@n8n/nodes-base",
   "version": "1.0.0",
   "description": "Base nodes for n8n",
-  "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "format": "prettier --write ."
+  "license": "SEE LICENSE IN LICENSE.md",
+  "homepage": "https://n8n.io",
+  "author": {
+    "name": "Jan Oberhauser",
+    "email": "jan@n8n.io"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n8n-io/n8n.git"
+  },
+  "main": "dist/index",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "dev": "pnpm watch",
+    "typecheck": "tsc",
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write . --ignore-path ../../.prettierignore",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "lint": "eslint --quiet src"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/**/*.json"
+  ],
   "dependencies": {
-    "n8n-core": "workspace:*",
-    "n8n-workflow": "workspace:*",
     "puppeteer-core": "^19.11.1"
   },
   "devDependencies": {

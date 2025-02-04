@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2022",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2022",
     "lib": ["es2022", "dom"],
@@ -14,7 +14,10 @@
     "outDir": "./dist",
     "esModuleInterop": true,
     "sourceMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowJs": true
   },
   "include": ["packages/**/*"],
   "exclude": ["node_modules/**/*", "**/*.spec.ts"]
