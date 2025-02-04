@@ -1,15 +1,7 @@
 import type { INodeType, INodeTypeDescription } from "n8n-workflow";
 import { NodeConnectionType } from "n8n-workflow";
 import type { IExecuteFunctions } from "n8n-workflow";
-
-// Import puppeteer synchronously
-let puppeteer;
-try {
-  puppeteer = require("puppeteer-core");
-} catch (error) {
-  // Handle error if needed
-  console.error("Failed to load puppeteer:", error);
-}
+import { PuppeteerService } from "./puppeteerService";
 
 interface LinkedInResult {
   url: string;
@@ -72,10 +64,8 @@ export class JobInfo implements INodeType {
     industries: string[],
     locations: string[]
   ): Promise<LinkedInResult[]> {
-    if (!puppeteer) {
-      throw new Error("Puppeteer is not initialized");
-    }
-
+    const puppeteer = PuppeteerService.getInstance();
+    
     const browser = await puppeteer.launch({
       headless: true,
       executablePath: "/tmp/chrome/chrome/opt/google/chrome/chrome",
