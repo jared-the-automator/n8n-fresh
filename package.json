@@ -2,15 +2,12 @@
   "name": "n8n",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "build": "npm run build:nodes-base && npm run build:editor-ui",
-    "build:nodes-base": "cd packages/nodes-base && npm run build",
-    "build:editor-ui": "cd packages/editor-ui && npm run build",
-    "install:all": "npm install && cd packages/nodes-base && npm install && cd ../editor-ui && npm install"
-  },
   "devDependencies": {
     "@types/express": "4.17.13",
     "@vitejs/plugin-vue": "4.6.2",
-    "typescript": "5.0.0"
+    "typescript": "5.3.3"
+  },
+  "scripts": {
+    "build": "cd packages/nodes-base && npm run build && cd ../editor-ui && npm run build"
   }
 }

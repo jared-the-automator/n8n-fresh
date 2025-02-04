@@ -18,12 +18,7 @@ jobs:
           node-version: '18.x'
 
       - name: Install dependencies
-        run: |
-          npm install
-          cd packages/nodes-base && npm install
-          cd ../editor-ui && npm install
+        run: npm install
 
       - name: Build
-        run: |
-          cd packages/nodes-base && npm run build
-          cd ../editor-ui && npm run build
+        run: npm run build
