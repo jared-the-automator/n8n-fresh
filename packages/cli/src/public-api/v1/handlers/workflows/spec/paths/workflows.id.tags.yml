@@ -34,7 +34,7 @@ put:
     content:
       application/json:
         schema:
-            $ref: '../schemas/tagIds.yml'
+          $ref: '../schemas/tagIds.yml'
     required: true
   responses:
     '200':
