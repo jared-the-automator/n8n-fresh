@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PNPM_HOME: /usr/local/share/pnpm
-      SKIP_PNPM_STORE_PATH: true
+      NODE_OPTIONS: --no-warnings --experimental-modules
+      NODE_NO_WARNINGS: 1
     steps:
       - uses: actions/checkout@v4
 
