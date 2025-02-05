@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SKIP_PNPM_STORE_PATH: true
     steps:
       - uses: actions/checkout@v4
 
@@ -18,6 +16,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+
+      - name: Disable corepack
+        run: sudo rm -f /usr/local/bin/pnpm /usr/local/bin/yarn
 
       - name: Install root dependencies
         run: npm install
