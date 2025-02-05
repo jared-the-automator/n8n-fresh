@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      COREPACK_ENABLE_STRICT: 0
     steps:
       - uses: actions/checkout@v4
 
@@ -18,11 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '16.x'
-
-      - name: Setup Corepack
-        run: |
-          npm install -g corepack@0.20.0
-          corepack enable
+          corepack: false
 
       - name: Install root dependencies
         run: npm install
