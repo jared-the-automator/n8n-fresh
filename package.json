@@ -2,9 +2,6 @@
   "name": "n8n",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@types/express": "4.17.13",
     "@vitejs/plugin-vue": "4.6.2",
@@ -14,6 +11,6 @@
     "n8n-workflow": "1.21.0"
   },
   "scripts": {
-    "build": "cd packages/nodes-base && npm run build && cd ../editor-ui && npm run build"
+    "build": "cd packages/nodes-base && npm install && npm run build && cd ../editor-ui && npm install && npm run build"
   }
 }
