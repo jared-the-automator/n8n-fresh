@@ -2,6 +2,7 @@
   "name": "n8n",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "npm@10.x",
   "devDependencies": {
     "@types/express": "4.17.13",
     "@vitejs/plugin-vue": "4.6.2",
