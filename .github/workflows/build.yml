@@ -9,14 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PNPM_HOME: /usr/local/share/pnpm
+      SKIP_PNPM_STORE_PATH: true
     steps:
       - uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.17.0'
-          cache: false
+          node-version: '16.x'
 
       - name: Install root dependencies
         run: npm install
