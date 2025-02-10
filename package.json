@@ -3,8 +3,17 @@
     "version": "0.1.0",
     "private": true,
     "packageManager": "pnpm@8.15.4",
+    "scripts": {
+        "install:all": "pnpm install --force",
+        "build": "pnpm exec turbo run build",
+        "start": "cd packages/core && pnpm start"
+    },
+    "dependencies": {
+        "n8n": "1.77.3"
+    },
     "devDependencies": {
         "@types/lodash": "4.14.195",
-        "vitest": "^3.0.5"
+        "typescript": "5.0.4",
+        "turbo": "latest"
     }
 }

@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: n8n
+    env: node
+    buildCommand: pnpm install --force && pnpm run build
+    startCommand: pnpm start
+    nodeVersion: 18.19.1
+    envVars:
+      - key: NODE_VERSION
+        value: 18.19.1
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+      - key: N8N_ENTERPRISE_FEATURES
+        value: true
+      - key: N8N_ENTERPRISE_NODES
+        value: true
+      - key: N8N_ENTERPRISE_EDITION
+        value: true
