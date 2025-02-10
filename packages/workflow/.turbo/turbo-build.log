@@ -1,0 +1,4 @@
+
+> n8n-workflow@0.1.0 build C:\Users\flux\n8n\packages\workflow
+> tsc --project tsconfig.build.json
+

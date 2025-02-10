@@ -1,0 +1,4 @@
+
+> @n8n/core@0.1.0 build C:\Users\flux\n8n\packages\core
+> tsc --project tsconfig.build.json
+

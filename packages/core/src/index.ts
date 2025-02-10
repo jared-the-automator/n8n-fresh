@@ -1,19 +1,5 @@
-import * as NodeExecuteFunctions from './node-execute-functions';
+import { Workflow } from 'n8n-workflow';
 
-export * from './binary-data';
-export * from './constants';
-export * from './credentials';
-export * from './data-deduplication-service';
-export * from './decorators';
-export * from './encryption';
-export * from './errors';
-export * from './execution-engine';
-export * from './instance-settings';
-export * from './logging';
-export * from './nodes-loader';
-export * from './utils';
-export { WorkflowHasIssuesError } from './errors/workflow-has-issues.error';
-
-export * from './interfaces';
-export * from './node-execute-functions';
-export { NodeExecuteFunctions };
+console.log('n8n Core Starting...');
+const workflow = new Workflow();
+console.log('Workflow Version:', workflow.version);
