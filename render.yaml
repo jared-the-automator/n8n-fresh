@@ -2,7 +2,7 @@ services:
   - type: web
     name: n8n
     env: node
-    buildCommand: pnpm install --force && pnpm run build
+    buildCommand: pnpm install --no-frozen-lockfile && pnpm run build
     startCommand: pnpm start
     nodeVersion: 18.19.1
     envVars:
