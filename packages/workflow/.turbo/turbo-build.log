@@ -1,4 +1,105 @@
 
-> n8n-workflow@0.1.0 build C:\Users\flux\n8n\packages\workflow
+> n8n-workflow@0.1.0 build C:\Users\flux\n8n-fresh-repo\packages\workflow
 > tsc --project tsconfig.build.json
 
+../../node_modules/.pnpm/@types+mdx@2.0.13/node_modules/@types/mdx/types.d.ts(23,38): error TS2503: Cannot find namespace 'JSX'.
+../../node_modules/.pnpm/@types+mdx@2.0.13/node_modules/@types/mdx/types.d.ts(28,23): error TS2503: Cannot find namespace 'JSX'.
+../../node_modules/.pnpm/@types+mdx@2.0.13/node_modules/@types/mdx/types.d.ts(47,28): error TS2503: Cannot find namespace 'JSX'.
+../../node_modules/.pnpm/@types+mdx@2.0.13/node_modules/@types/mdx/types.d.ts(73,46): error TS2503: Cannot find namespace 'JSX'.
+src/errors/application.error.ts(22,49): error TS2304: Cannot find name 'ErrorOptions'.
+src/errors/application.error.ts(24,18): error TS2554: Expected 0-1 arguments, but got 2.
+src/errors/ensure-error.ts(5,69): error TS2554: Expected 0-1 arguments, but got 2.
+src/errors/node-api.error.ts(5,29): error TS7016: Could not find a declaration file for module 'xml2js'. 'C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/xml2js@0.6.2/node_modules/xml2js/lib/xml2js.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/xml2js` if it exists or add a new declaration (.d.ts) file containing `declare module 'xml2js';`
+src/errors/node-api.error.ts(270,47): error TS7006: Parameter '_' implicitly has an 'any' type.
+src/errors/node-api.error.ts(270,50): error TS7006: Parameter 'result' implicitly has an 'any' type.
+src/errors/trigger-close.error.ts(4,44): error TS2304: Cannot find name 'ErrorOptions'.
+src/errors/trigger-close.error.ts(11,5): error TS2339: Property 'cause' does not exist on type 'TriggerCloseErrorOptions'.
+src/Expression.ts(92,4): error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+src/Extensions/ArrayExtensions.ts(1,23): error TS7016: Could not find a declaration file for module 'deep-equal'. 'C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/deep-equal@2.2.0/node_modules/deep-equal/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/deep-equal` if it exists or add a new declaration (.d.ts) file containing `declare module 'deep-equal';`
+src/Extensions/DateExtensions.ts(190,31): error TS2345: Argument of type 'number' is not assignable to parameter of type 'WeekdayNumbers'.
+src/Extensions/ExpressionExtension.ts(161,6): error TS2322: Type 'ConditionalExpression' is not assignable to type 'ExpressionKind'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.ConditionalExpression' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.ConditionalExpression'.
+    Types of property 'test' are incompatible.
+      Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(168,7): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(175,6): error TS2322: Type 'AssignmentExpression' is not assignable to type 'ExpressionKind'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.AssignmentExpression' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.AssignmentExpression'.
+    Types of property 'left' are incompatible.
+      Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").PatternKind | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").MemberExpressionKind' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").PatternKind | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").MemberExpressionKind'.
+        Type 'Identifier' is not assignable to type 'PatternKind | MemberExpressionKind'.
+          Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.Identifier' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.Identifier'.
+src/Extensions/ExpressionExtension.ts(175,77): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(184,6): error TS2322: Type 'BinaryExpression' is not assignable to type 'ExpressionKind'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.BinaryExpression' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.BinaryExpression'.
+    Types of property 'left' are incompatible.
+      Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(188,8): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(197,6): error TS2322: Type 'AssignmentExpression' is not assignable to type 'ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(197,78): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(200,9): error TS2322: Type 'ChainElementKind' is not assignable to type 'ExpressionKind'.
+  Type 'MemberExpression' is not assignable to type 'ExpressionKind'.
+    Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.MemberExpression' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.MemberExpression'.
+      Types of property 'object' are incompatible.
+        Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind'.
+          Type 'Identifier' is not assignable to type 'ExpressionKind'.
+            Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.Identifier' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.Identifier'.
+              Types of property 'typeAnnotation' are incompatible.
+                Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.TypeAnnotation | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").TSTypeAnnotationKind | null | undefined' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.TypeAnnotation | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").TSTypeAnnotationKind | null | undefined'.
+                  Type 'TypeAnnotation' is not assignable to type 'TypeAnnotation | TSTypeAnnotationKind | null | undefined'.
+                    Property 'parameterName' is missing in type 'TypeAnnotation' but required in type 'TSTypePredicate'.
+src/Extensions/ExpressionExtension.ts(243,8): error TS2322: Type 'MemberExpression' is not assignable to type 'ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(245,9): error TS2345: Argument of type 'Identifier | JSXIdentifier | TSTypeParameter | PrivateName | TSAsExpression | TSNonNullExpression | ... 51 more ... | TopicReference' is not assignable to parameter of type 'Identifier | JSXIdentifier | TSTypeParameter | PrivateName | TSAsExpression | TSSatisfiesExpression | ... 54 more ... | TSInstantiationExpression'.
+  Type 'Identifier' is not assignable to type 'Identifier | JSXIdentifier | TSTypeParameter | PrivateName | TSAsExpression | TSSatisfiesExpression | ... 54 more ... | TSInstantiationExpression'.
+    Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.Identifier' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.Identifier'.
+      Types of property 'typeAnnotation' are incompatible.
+        Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.TypeAnnotation | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").TSTypeAnnotationKind | null | undefined' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.TypeAnnotation | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").TSTypeAnnotationKind | null | undefined'.
+          Type 'TypeAnnotation' is not assignable to type 'TypeAnnotation | TSTypeAnnotationKind | null | undefined'.
+            Property 'parameterName' is missing in type 'TypeAnnotation' but required in type 'TSTypePredicate'.
+src/Extensions/ExpressionExtension.ts(250,8): error TS2322: Type 'CallExpression' is not assignable to type 'ExpressionKind'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.CallExpression' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.CallExpression'.
+    Types of property 'callee' are incompatible.
+      Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(252,9): error TS2345: Argument of type '(import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.SpreadElement)[]' is not assignable to parameter of type '(import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.SpreadElement)[]'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.SpreadElement' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind | import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.SpreadElement'.
+    Type 'Identifier' is not assignable to type 'ExpressionKind | SpreadElement'.
+      Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.Identifier' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.Identifier'.
+src/Extensions/ExpressionExtension.ts(281,10): error TS2322: Type 'CallExpression' is not assignable to type 'ExpressionKind | null'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.CallExpression' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.CallExpression'.
+src/Extensions/ExpressionExtension.ts(283,12): error TS2322: Type 'ExpressionKind' is not assignable to type 'ExpressionKind | SpreadElement'.
+  Type 'Identifier' is not assignable to type 'ExpressionKind | SpreadElement'.
+src/Extensions/ExpressionExtension.ts(288,26): error TS2345: Argument of type 'ExpressionKind | null' is not assignable to parameter of type 'ExpressionKind'.
+  Type 'null' is not assignable to type 'ExpressionKind'.
+src/Extensions/ExpressionExtension.ts(333,9): error TS2322: Type 'CallExpression' is not assignable to type 'ExpressionKind | null'.
+src/Extensions/ExpressionExtension.ts(335,11): error TS2322: Type 'ExpressionKind' is not assignable to type 'ExpressionKind | SpreadElement'.
+src/Extensions/ExpressionExtension.ts(379,60): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind[]' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind[]'.
+  Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/kinds").ExpressionKind' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/kinds").ExpressionKind'.
+    Type 'Identifier' is not assignable to type 'ExpressionKind'.
+      Type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.15.2/node_modules/ast-types/gen/namedTypes").namedTypes.Identifier' is not assignable to type 'import("C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ast-types@0.16.1/node_modules/ast-types/lib/gen/namedTypes").namedTypes.Identifier'.
+src/Extensions/StringExtensions.ts(4,17): error TS7016: Could not find a declaration file for module 'md5'. 'C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/md5@2.3.0/node_modules/md5/md5.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/md5` if it exists or add a new declaration (.d.ts) file containing `declare module 'md5';`
+src/Interfaces.ts(9,41): error TS2307: Cannot find module 'nock' or its corresponding type declarations.
+src/Interfaces.ts(10,42): error TS7016: Could not find a declaration file for module 'ssh2'. 'C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/ssh2@1.15.0/node_modules/ssh2/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/ssh2` if it exists or add a new declaration (.d.ts) file containing `declare module 'ssh2';`
+src/NodeHelpers.ts(496,10): error TS2339: Property 'show' does not exist on type 'IDisplayOptions | ICredentialsDisplayOptions | undefined'.
+src/NodeHelpers.ts(496,16): error TS2339: Property 'hide' does not exist on type 'IDisplayOptions | ICredentialsDisplayOptions | undefined'.
+src/TypeValidation.ts(198,19): error TS2571: Object is of type 'unknown'.
+src/utils.ts(83,14): error TS2339: Property 'key' does not exist on type 'ObjectExpressionProperty'.
+src/utils.ts(83,19): error TS2339: Property 'value' does not exist on type 'ObjectExpressionProperty'.
+src/Workflow.ts(506,9): error TS18048: 'checkedNodes' is possibly 'undefined'.
+src/WorkflowDataProxy.ts(5,27): error TS7016: Could not find a declaration file for module 'jmespath'. 'C:/Users/flux/n8n-fresh-repo/node_modules/.pnpm/jmespath@0.16.0/node_modules/jmespath/jmespath.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/jmespath` if it exists or add a new declaration (.d.ts) file containing `declare module 'jmespath';`
+src/WorkflowDataProxy.ts(263,48): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+  Property 'version' is missing in type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' but required in type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxy.ts(314,34): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxy.ts(666,49): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxy.ts(783,34): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxy.ts(912,6): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxy.ts(1008,36): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxy.ts(1075,12): error TS2345: Argument of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/Workflow").Workflow' is not assignable to parameter of type 'import("C:/Users/flux/n8n-fresh-repo/packages/workflow/src/index").Workflow'.
+src/WorkflowDataProxyHelpers.ts(1,15): error TS2305: Module '"."' has no exported member 'INodeExecutionData'.
+src/WorkflowDataProxyHelpers.ts(1,45): error TS2305: Module '"."' has no exported member 'WorkflowExecuteMode'.
+src/WorkflowDataProxyHelpers.ts(11,18): error TS2339: Property 'getPinDataOfNode' does not exist on type 'Workflow'.
+ ELIFECYCLE  Command failed with exit code 2.

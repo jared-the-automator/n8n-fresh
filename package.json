@@ -9,11 +9,14 @@
         "start": "cd packages/core && pnpm start"
     },
     "dependencies": {
+        "ast-types": "0.15.2",
         "n8n": "1.77.3"
     },
     "devDependencies": {
         "@types/lodash": "4.14.195",
-        "typescript": "5.0.4",
-        "turbo": "latest"
+        "@types/react": "^19.0.8",
+        "@types/react-dom": "^19.0.3",
+        "turbo": "latest",
+        "typescript": "5.0.4"
     }
 }

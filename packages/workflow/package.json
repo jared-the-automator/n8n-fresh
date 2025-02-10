@@ -1,9 +1,21 @@
 {
     "name": "n8n-workflow",
     "version": "0.1.0",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "build": "tsc --project tsconfig.build.json"
+    "dependencies": {
+        "ast-types": "0.15.2",
+        "deep-equal": "^2.2.0",
+        "jmespath": "^0.16.0",
+        "md5": "^2.3.0",
+        "ssh2": "^1.16.0",
+        "xml2js": "^0.6.2"
+    },
+    "devDependencies": {
+        "@types/deep-equal": "^1.0.4",
+        "@types/jmespath": "^0.15.2",
+        "@types/md5": "^2.3.5",
+        "@types/nock": "^11.1.0",
+        "@types/ssh2": "^1.15.4",
+        "@types/xml2js": "^0.4.14",
+        "typescript": "^5.3.3"
     }
 }

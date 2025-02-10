@@ -1,10 +1,18 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "declaration": true,
-        "composite": true
+        "rootDir": "src",
+        "outDir": "dist",
+        "strict": false,
+        "skipLibCheck": true,
+        "composite": true,
+        "incremental": true,
+        "tsBuildInfoFile": "../../.build-info/workflow.tsbuildinfo",
+        "types": ["node", "jest"],
+        "paths": {
+            "*": ["./types/*"]
+        }
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    "exclude": ["src/**/*.spec.ts", "test/**/*"]
 }

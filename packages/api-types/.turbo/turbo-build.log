@@ -1,7 +1,0 @@
-
-> @n8n/api-types@0.1.0 build C:\Users\flux\n8n\packages\api-types
-> tsc --project tsconfig.build.json
-
-error TS5058: The specified path does not exist: 'tsconfig.build.json'.
- ELIFECYCLE  Command failed with exit code 1.
- WARN   Local package.json exists, but node_modules missing, did you mean to install?

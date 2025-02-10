@@ -1,5 +1,5 @@
-import { Workflow } from 'n8n-workflow';
+export const version = '1.0.0';
 
-console.log('n8n Core Starting...');
-const workflow = new Workflow();
-console.log('Workflow Version:', workflow.version);
+export function init() {
+    return true;
+}

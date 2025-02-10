@@ -1,7 +1,0 @@
-{
-  "name": "@n8n/api-types",
-  "version": "0.1.0",
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json"
-  }
-}

@@ -1,9 +1,6 @@
-import { ApplicationError } from 'n8n-workflow';
-
-export class UnrecognizedNodeTypeError extends ApplicationError {
-	severity = 'warning';
-
-	constructor(packageName: string, nodeType: string) {
-		super(`Unrecognized node type: ${packageName}.${nodeType}`);
-	}
+export class UnrecognizedNodeTypeError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'UnrecognizedNodeTypeError';
+    }
 }
