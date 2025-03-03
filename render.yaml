@@ -2,14 +2,9 @@ services:
   - type: web
     name: n8n
     env: node
+    plan: free
     buildCommand: npm i -g pnpm && pnpm install
     startCommand: pnpm start
     envVars:
       - key: NODE_VERSION
         value: 18.19.1
-      - key: N8N_USER_FOLDER
-        value: /opt/render/project/src/.n8n
-      - key: N8N_PORT
-        value: 3000
-      - key: PORT
-        value: 3000
