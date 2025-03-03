@@ -5,9 +5,12 @@
     "packageManager": "pnpm@8.15.4",
     "scripts": {
         "start": "n8n start",
-        "build": "mkdir -p /data/.n8n && n8n start"
+        "build": "mkdir -p ./data/.n8n"
     },
     "dependencies": {
         "n8n": "1.77.3"
+    },
+    "n8n": {
+        "n8nFolder": "./data/.n8n"
     }
 }
