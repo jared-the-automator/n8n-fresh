@@ -9,3 +9,7 @@ services:
         value: 18.19.1
       - key: N8N_USER_FOLDER
         value: /opt/render/project/src/.n8n
+      - key: N8N_PORT
+        value: 3000
+      - key: PORT
+        value: 3000
