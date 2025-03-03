@@ -5,14 +5,9 @@
     "packageManager": "pnpm@8.15.4",
     "scripts": {
         "start": "n8n start",
-        "build": "tsc",
-        "install:all": "pnpm install"
+        "build": "n8n build"
     },
     "dependencies": {
         "n8n": "1.77.3"
-    },
-    "devDependencies": {
-        "@types/node": "^18.19.1",
-        "typescript": "^5.3.3"
     }
 }
