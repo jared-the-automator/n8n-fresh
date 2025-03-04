@@ -8,6 +8,7 @@
         "start": "n8n start"
     },
     "dependencies": {
-        "n8n": "1.77.3"
+        "n8n": "1.77.3",
+        "n8n-nodes-tesseractjs": "0.1.0"
     }
 }

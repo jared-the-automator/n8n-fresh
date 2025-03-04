@@ -15,3 +15,5 @@ services:
         value: 3000
       - key: PORT
         value: 3000
+      - key: N8N_CUSTOM_EXTENSIONS
+        value: n8n-nodes-tesseractjs
