@@ -9,6 +9,6 @@
     },
     "dependencies": {
         "n8n": "1.77.3",
-        "n8n-nodes-tesseractjs": "0.1.0"
+        "n8n-nodes-tesseractjs": "^1.2.0"
     }
 }
