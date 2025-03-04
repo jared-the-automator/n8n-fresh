@@ -1,9 +1,17 @@
-FROM node:18-alpine
-RUN npm install -g pnpm
-WORKDIR /app
-COPY package.json .
-COPY .npmrc .
-RUN mkdir -p /data/.n8n && chown -R node:node /data/.n8n
+FROM n8nio/n8n:latest
+
+USER root
+
+# Install Tesseract and its dependencies using Alpine package manager
+RUN apk add --no-cache \
+    tesseract-ocr \
+    tesseract-ocr-data-eng
+
+# Switch back to n8n user
 USER node
-RUN pnpm install
-CMD ["pnpm", "start"]
+
+# Set environment variables
+ENV TESSDATA_PREFIX=/usr/share/tessdata
+
+# Start n8n
+CMD ["n8n", "start"]
