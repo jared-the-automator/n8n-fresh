@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 services:
   - type: web
     name: n8n
@@ -15,3 +16,15 @@ services:
         value: 3000
       - key: PORT
         value: 3000
+=======
+services:
+  - type: web
+    name: n8n
+    env: node
+    plan: free
+    buildCommand: npm i -g pnpm && pnpm install
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.19.1
+>>>>>>> 17db27a0f48b718bd09221332dc5fdb8c9b692be
