@@ -3,7 +3,7 @@ services:
     name: n8n
     env: docker
     buildCommand: docker build -t n8n-tesseract .
-    startCommand: docker run -p 3000:3000 n8n-tesseract
+    startCommand: docker run -p 443:443 n8n-tesseract
     envVars:
       - key: NODE_VERSION
         value: 18.19.1
@@ -12,8 +12,14 @@ services:
       - key: N8N_PROTOCOL
         value: https
       - key: N8N_PORT
-        value: 3000
+        value: 443
       - key: PORT
-        value: 3000
+        value: 443
       - key: N8N_CUSTOM_EXTENSIONS
+        value: n8n-nodes-tesseractjs
+      - key: N8N_CUSTOM_API_CALL_ENABLED
+        value: true
+      - key: N8N_CUSTOM_API_CALL_KEY
+        value: true
+      - key: N8N_PACKAGE_EXTENSIONS
         value: n8n-nodes-tesseractjs
