@@ -1,5 +1,5 @@
 # Use the official n8n image (replace version as needed)
-FROM n8nio/n8n:1.89.0
+FROM n8nio/n8n:latest
 
 # If you need to install extra packages or customizations, add them here
 # Example:
